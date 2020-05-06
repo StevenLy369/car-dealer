@@ -1,65 +1,55 @@
-using System;
-using System.Collections.Generic;
-
-public class Car
+namespace Models
 {
-  public string MakeModel;
-  public int Price;
-  public int Miles;
-
-  public string Info;
-
-  public Car(string makeModel, int price, int miles, string info)
+  public class Car
   {
-    MakeModel = makeModel;
-    Price = price;
-    Miles = miles;
-    Info = info;
-  }
+    private string _MakeModel;
+    private int _Price;
+    private int _Miles;
 
-  public bool WorthBuying(int maxPrice)
-  {
-    return (Price < maxPrice);
-  }
-}
+    private string _Color;
 
-public class Program
-{
-  public static void Main()
-  {
-    Car audi = new Car("2015 Audi s4", 25000, 35000, "Very nice car. I like");
-    Car yugo = new Car("1980 Yugo Koral", 9000, 56000, "Okay car, not bad.");
-    Car ford = new Car("1988 Ford Country Squire", 7500, 176554, "Decent car");
-    Car amc = new Car("1976 AMC Pacer",5000, 198000, "Okay car");
+    private string _Sound;
 
-    List<Car> Cars = new List<Car>() { audi, yugo, ford, amc };
-
-    Console.WriteLine("Enter maximum price: ");
-    string stringMaxPrice = Console.ReadLine();
-    int maxPrice = int.Parse(stringMaxPrice);
-    Console.WriteLine("Enter Maximum amount of miles.");
-    string maxMileageStr = Console.ReadLine();
-    int maxMileage = int.Parse(maxMileageStr);
-    List<Car> CarsMatchingSearch = new List<Car>(0);
-
-    foreach (Car automobile in Cars)
+    public Car(string makeModel, int price, int miles, string color)
     {
-      if (automobile.WorthBuying(maxPrice) && automobile.Miles < maxMileage)
-      {
-        CarsMatchingSearch.Add(automobile);
-      }
-      if (maxPrice < 5000){
-          Console.WriteLine("You too cheap, we dont sell cars that low");
-      }
-      if (maxMileage < 7500){
-          Console.WriteLine("Sorry, We sell used cars here. Not new.");
-      }
+      _MakeModel = makeModel;
+      _Price = price;
+      _Miles = miles;
+      _Color = color;
+      
     }
 
-    foreach(Car automobile in CarsMatchingSearch)
+    public static string MakeSound(string sound){
+        return "Our cars sound like " + sound;
+    }
+
+    public void SetPrice(int newPrice){
+        _Price = newPrice;
+    }
+    public void SetColor(string color){
+        _Color = color;
+    }
+    public string GetMakeModel(){
+        return _MakeModel;
+    }
+
+    public int GetMiles(){
+        return _Miles;
+    }
+
+    public string getColor(){
+        return _Color;
+    }
+
+    public int GetPrice(){
+        return _Price;
+    }
+    public string GetSound(){
+        return _Sound;
+    }
+    public bool WorthBuying(int maxPrice)
     {
-      Console.WriteLine(automobile.MakeModel);
-      Console.WriteLine(automobile.Info);
+      return (_Price < maxPrice);
     }
   }
 }
